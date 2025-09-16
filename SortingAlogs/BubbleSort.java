@@ -8,7 +8,7 @@ public class BubbleSort {
         int[] arr2 = {1,2,3,4,5,6};
         bubble(arr);
         bubble(arr2);
-        System.out.println(Arrays.toString(arr2));
+        System.out.println(Arrays.toString(arr));
     }
     static void bubble(int[] arr){
         // taking boolean to check wether the array is already sorted or not 
