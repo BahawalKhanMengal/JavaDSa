@@ -8,15 +8,21 @@ public class ReverseNumber {
        System.out.println();
        reverse(n);
        System.out.println(palindrom(n));
+        reverseNumber(132);
+        System.out.println();
         System.out.println(reverseleet(132));
     }
     static int rev = 0;
     static int reverseleet(int x) {
-        if(x==0){
+        
+        if(x%10==x){
+            int rem = x % 10;
+            rev = rev * 10 + rem;
             return rev;
         }
         int rem = x % 10;
-        return (rev = rev * 10 + rem) + reverseleet(x/10);
+        rev = rev * 10 + rem;
+        return  reverseleet(x/10);
     }
     // palindrom
     static boolean palindrom(int n){

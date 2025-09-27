@@ -24,9 +24,7 @@ public class Calculator {
                     continue;
                 }
                 answer = num1 / num2;
-            } else if(operator == '%') {
-                answer = num1 % num2;
-            }
+            } else if(operator == '%') answer = num1 % num2;
        }
        else if (operator == 'q' || operator == 'Q') {
             System.out.println("Exiting calculator.");
