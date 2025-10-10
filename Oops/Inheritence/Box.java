@@ -2,9 +2,10 @@ package Oops.Inheritence;
 
 public class Box {
 //    private int l;
-    int l;
+    private int l;
     int w;
     int h;
+
 
     //cube
     Box() {
@@ -23,5 +24,11 @@ public class Box {
         this.l = old.l;
         this.w = old.w;
         this.h = old.h;
+    }
+    static void greeting(){
+        System.out.println("Hey this is greeting from the Box Parent Class");
+    }
+    public int getL(){
+        return l;
     }
 }
