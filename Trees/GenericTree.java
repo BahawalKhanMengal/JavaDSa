@@ -253,8 +253,84 @@ public static int distanceBetweenTwoNodes(Node node , int data1, int data2){
         return areMirror(node,node);
     }
 //    multi solver function
-    public static void mulitiSolver(Node node){
+//    the values before multi solver and after this comment are just for mulitsolve function
+    static int size;
+    static int max ;
+    static int min;
+    static int height;
 
+    public static void mulitiSolver(Node node,int depth){
+        size++;
+        max = Math.max(max,node.data);
+        min = Math.min(min,node.data);
+        height = Math.max(height,depth);
+        for (Node child: node.children){
+            mulitiSolver(child,depth+1);
+        }
+    }
+//    Predecessor and Successor of an element
+    static Node predecessor ;
+    static Node successor;
+    static int state;
+    public static void predecessorAndSuccessor(Node node, int data){
+        if (state == 0){
+            if (node.data == data){
+                state = 1;
+            }else {
+                predecessor = node;
+            }
+        }else if(state == 1){
+            successor = node;
+            state = 2;
+        }
+        for (Node child:node.children){
+            predecessorAndSuccessor(node,data);
+        }
+    }
+//    finding ceil and floor values of a given data
+    static int ceil;
+    static int floor;
+    public static void ceilAndFloor(Node node,int data){
+        if (node.data>data){
+            if (node.data < ceil ){
+                ceil = node.data;
+            }
+        }
+        if (node.data<data){
+            if (node.data>floor){
+                floor = node.data;
+            }
+        }
+        for (Node child:node.children){
+            ceilAndFloor(node,data);
+        }
+    }
+//    finding nth largest value
+    public static int nthLargest(Node node, int n){
+        floor = Integer.MIN_VALUE;
+        int factor = Integer.MAX_VALUE;
+        for(int i = 0; i <n ; i++) {
+            ceilAndFloor(node,factor);
+            factor = floor;
+            floor = Integer.MIN_VALUE;
+        }
+        return factor;
+    }
+//    node with maximum subtree
+    static int msn = 0;
+    static int ms = Integer.MIN_VALUE;
+    public static int retSumAndCalculateMaxST(Node node){
+        int sum = 0;
+        for (Node child:node.children){
+            int csum = retSumAndCalculateMaxST(node);
+            sum += csum;
+        }
+        sum += node.data;
+        if (sum>ms){
+            msn = node.data;
+            ms = sum;
+        }
+        return sum;
     }
     public static void main(String[] args){
         int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,190,-1,-1,90,-1,-1,40,100,-1,-1,-1};
@@ -295,23 +371,23 @@ public static int distanceBetweenTwoNodes(Node node , int data1, int data2){
         System.out.println(areMirror(root,root2));
         display(root);
         int sz = size(root);
-        System.out.println(sz);
-        System.out.println(max(root));
-        System.out.println(height(root));
-        triversal(root);
-        levelOrder(root);
-        levelOrderLinewise(root);
-        levelOrderLineWiseZZ(root);
-        mirror(root);
-//        removeLeaves(root);
-        System.out.println(find(root,30));
-        System.out.println(find(root,90000));
-        ArrayList<Integer> list = nodeToRootPath(root,110);
-        ArrayList<Integer> list2 = nodeToRootPath(root,70);
-        System.out.println(list);
-        System.out.println(list2);
-        System.out.println(lowestCommonAncestor(root,110,190));
-        System.out.println(distanceBetweenTwoNodes(root,70,110));
+//        System.out.println(sz);
+//        System.out.println(max(root));
+//        System.out.println(height(root));
+//        triversal(root);
+//        levelOrder(root);
+//        levelOrderLinewise(root);
+//        levelOrderLineWiseZZ(root);
+//        mirror(root);
+////        removeLeaves(root);
+//        System.out.println(find(root,30));
+//        System.out.println(find(root,90000));
+//        ArrayList<Integer> list = nodeToRootPath(root,110);
+//        ArrayList<Integer> list2 = nodeToRootPath(root,70);
+//        System.out.println(list);
+//        System.out.println(list2);
+//        System.out.println(lowestCommonAncestor(root,110,190));
+//        System.out.println(distanceBetweenTwoNodes(root,70,110));
 
     }
 }
